@@ -1,5 +1,7 @@
 package edu.cpp.cs241;
 
+import java.util.Stack;
+
 public class TreeNode<T> {
 
 	private T data;
@@ -57,6 +59,21 @@ public class TreeNode<T> {
 			System.out.println(root.getData());
 			preorderTraverse(root.getLeftChild());
 			preorderTraverse(root.getRightChild());
+		}
+	}
+
+	public void preOrderTraverseNonRec() {
+		Stack<TreeNode<T>> stack = new Stack<>();
+		stack.push(this);
+		while(!stack.isEmpty()) {
+			TreeNode<T> currentNode = stack.pop();
+			System.out.println(currentNode.getData());
+			if (currentNode.getRightChild() != null) {
+				stack.push(currentNode.getRightChild());
+			}
+			if (currentNode.getLeftChild() != null) {
+				stack.push(currentNode.getLeftChild());
+			}
 		}
 	}
 
@@ -141,4 +158,5 @@ public class TreeNode<T> {
 			return this;
 		}
 	}
+
 }

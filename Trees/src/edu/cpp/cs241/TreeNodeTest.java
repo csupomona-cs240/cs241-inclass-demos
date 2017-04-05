@@ -35,6 +35,9 @@ public class TreeNodeTest {
 		System.out.println("Preorder Traversal");
 		tnRoot.preOrderTraverse();
 
+		System.out.println("Preorder Traversal Non-Recursive");
+		tnRoot.preOrderTraverseNonRec();
+
 		TreeNode<Integer> newTree = tnRoot.copy();
 		System.out.println("Inorder Traversal");
 		newTree.inorderTraverse();
