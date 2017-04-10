@@ -25,6 +25,26 @@ public class BinarySearchTree {
 		}
 	}
 
+	public TreeNode<Integer> findEntryNonRec(int dataToSearch) {
+		return findEntryNonRec(root, dataToSearch);
+	}
+
+	// search an element using the non-recursive algorithm
+	private TreeNode<Integer> findEntryNonRec(TreeNode<Integer> root, int dataToSearch) {
+		TreeNode<Integer> cursor = root;
+		while (cursor != null) {
+			if (cursor.getData() == dataToSearch) {
+				return cursor;
+			}
+			if (dataToSearch < cursor.getData()) {
+				cursor = cursor.getLeftChild();
+			} else {
+				cursor = cursor.getRightChild();
+			}
+		}
+		return null;
+	}
+
 	public void addEntry(int dataToAdd) {
 		TreeNode<Integer> newNode = new TreeNode<Integer>(dataToAdd);
 		// find position to add
@@ -73,4 +93,55 @@ public class BinarySearchTree {
 			}
 		}
 	}
+
+	public void removeEntry(int dataToRemove) {
+		removeEntry(root, dataToRemove);
+	}
+
+	public void removeEntry(TreeNode<Integer> root, int dataToRemove) {
+		TreeNode<Integer> cursor = root;
+		TreeNode<Integer> parent = null;
+		while(cursor != null && cursor.getData() != dataToRemove) {
+			parent = cursor;
+			if (dataToRemove < cursor.getData()) {
+				cursor = cursor.getLeftChild();
+			} else {
+				cursor = cursor.getRightChild();
+			}
+		}
+
+		if (cursor != null) {
+			// is leaf
+			if (cursor.isLeaf()) {
+				if (parent.getLeftChild() == cursor) {
+					parent.setLeftChild(null);
+				} else {
+					parent.setRightChild(null);
+				}
+			}
+			// has only a left child
+			else if (cursor.getLeftChild() != null && cursor.getRightChild() == null) {
+				if (parent.getLeftChild() == cursor) {
+					parent.setLeftChild(cursor.getLeftChild());
+				} else {
+					parent.setRightChild(cursor.getLeftChild());
+				}
+			}
+			// has only a right child
+			else if (cursor.getLeftChild() == null && cursor.getRightChild() != null) {
+				if (parent.getLeftChild() == cursor) {
+					parent.setLeftChild(cursor.getRightChild());
+				} else {
+					parent.setRightChild(cursor.getRightChild());
+				}
+			}
+			// has both children
+			else {
+				TreeNode<Integer> node = cursor.getLeftChild().getRightMostNode();
+				cursor.setData(node.getData());
+				cursor.setLeftChild(cursor.getLeftChild().removeRightmost());
+			}
+		}
+	}
+
 }

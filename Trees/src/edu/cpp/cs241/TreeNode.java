@@ -46,7 +46,7 @@ public class TreeNode<T> {
 		this.rightChild = rightChild;
 	}
 
-	public boolean isLeft() {
+	public boolean isLeaf() {
 		return this.leftChild == null && this.rightChild == null;
 	}
 
@@ -56,7 +56,7 @@ public class TreeNode<T> {
 
 	private void preorderTraverse(TreeNode<T> root) {
 		if (root != null) {
-			System.out.println(root.getData());
+			System.out.println(root.getData() + " " + root);
 			preorderTraverse(root.getLeftChild());
 			preorderTraverse(root.getRightChild());
 		}
@@ -138,6 +138,14 @@ public class TreeNode<T> {
 			return rightChild.getRightMostData();
 		} else {
 			return data;
+		}
+	}
+
+	public TreeNode<T> getRightMostNode() {
+		if (rightChild != null) {
+			return rightChild.getRightMostNode();
+		} else {
+			return this;
 		}
 	}
 

@@ -18,6 +18,9 @@ public class BinarySearchTreeTest {
 		BinarySearchTree bst = new BinarySearchTree(root);
 		System.out.println(bst.findEntry(35));
 		System.out.println(bst.findEntry(105));
+
+		System.out.println(bst.findEntryNonRec(35));
+		System.out.println(bst.findEntry(105));
 	}
 
 }
